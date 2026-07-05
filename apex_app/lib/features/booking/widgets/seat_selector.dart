@@ -1,0 +1,80 @@
+import 'package:flutter/material.dart';
+
+class SeatSelector extends StatelessWidget {
+  final int seats;
+  final int maxSeats;
+  final int freeKarts;
+  final ValueChanged<int> onChanged;
+
+  const SeatSelector({
+    super.key,
+    required this.seats,
+    required this.maxSeats,
+    required this.freeKarts,
+    required this.onChanged,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Количество мест',
+          style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                fontWeight: FontWeight.w600,
+              ),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          'Вы можете забронировать до $maxSeats мест',
+          style: TextStyle(color: Colors.grey[600], fontSize: 13),
+        ),
+        const SizedBox(height: 8),
+        Row(
+          children: [
+            _roundButton(
+              icon: Icons.remove,
+              onTap: seats > 1 ? () => onChanged(seats - 1) : null,
+            ),
+            const SizedBox(width: 16),
+            Text(
+              '$seats',
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(width: 16),
+            _roundButton(
+              icon: Icons.add,
+              onTap: seats < maxSeats ? () => onChanged(seats + 1) : null,
+            ),
+            const SizedBox(width: 12),
+            Text(
+              'мест(а)',
+              style: TextStyle(color: Colors.grey[600]),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _roundButton({
+    required IconData icon,
+    required VoidCallback? onTap,
+  }) {
+    return Material(
+      color: Colors.grey[200],
+      borderRadius: BorderRadius.circular(20),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(20),
+        onTap: onTap,
+        child: Container(
+          width: 40,
+          height: 40,
+          alignment: Alignment.center,
+          child: Icon(icon, color: onTap == null ? Colors.grey[400] : null),
+        ),
+      ),
+    );
+  }
+}
