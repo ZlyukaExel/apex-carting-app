@@ -44,14 +44,8 @@ flutter run
 # Собрать APK (Android)
 flutter build apk
 
-# Собрать iOS (только на macOS)
-flutter build ios
-
 # Запустить тесты
 flutter test
-
-# Проверить код
-flutter analyze
 ```
 
 Подключение к реальному бэкенду не требуется — приложение работает на мок-данных.
